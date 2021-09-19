@@ -1,0 +1,11 @@
+PATH_VETS = "lab_01/data/veterinarians.txt"
+PATH_QUALIFICATIONS = "lab_01/data/qualification_vets.txt"
+PATH_TREATMENTS = "lab_01/data/treatments.txt"
+PATH_ANIMALS = "lab_01/data/animals.txt"
+PATH_ANIMAL_NAMES = "lab_01/data/animal_names.txt"
+PATH_DIAGNOSISES = "lab_01/data/diagnosises.txt"
+
+PATH_VETS_DATABASE = "lab_01/database_csv/veterinarians.csv"
+PATH_TREATMENTS_DATABASE = "lab_01/database_csv/treatments.csv"
+PATH_ANIMALS_DATABASE = "lab_01/database_csv/animals.csv"
+PATH_DIAGNOSISES_DATABASE = "lab_01/database_csv/diagnosises.csv"
