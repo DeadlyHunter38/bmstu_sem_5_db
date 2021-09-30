@@ -1,8 +1,23 @@
-WITH diagnosis AS
+DROP TABLE IF EXISTS dupl_test;
+CREATE TABLE dupl_test
 (
-SELECT id_diagnosis, ROW_NUMBER() OVER(PARTITION by name, date, degree_severity, need_operation ORDER BY name) AS duplicateRecCount
-FROM diagnosis
-)
--- Now Delete Duplicate Records
-DELETE FROM diagnosis
-WHERE duplicateRecCount > 1;
+	id INTEGER,
+	name VARCHAR,
+	location VARCHAR
+);
+
+INSERT INTO dupl_test(id, name, location) VALUES
+(0, 'Арчи', 'дом1'),
+(1, 'Буч', 'улица'),
+(2, 'Арчи', 'дом'),
+(3, 'Патрик', 'улица')
+
+DELETE FROM dupl_test *
+WHERE id IN
+	(SELECT id
+	 FROM
+		(SELECT id, ROW_NUMBER() OVER w rown
+		 FROM dupl_test
+		 WINDOW w AS (PARTITION BY name, location
+		 ORDER BY name, location)) t
+		 WHERE t.rown > 1);
