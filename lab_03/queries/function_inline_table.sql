@@ -1,5 +1,5 @@
 --найти всех животных, которые лечатся у врача ... с датой поступления после 2015 года
-create or replace function visit_vet_after_year()
+create or replace function visit_vet_after_year(vet_surname_visit varchar(20), date_after date)
 returns table(animals_id int, 
 			  animal_name varchar(20), 
 			  animal_kind varchar(20), 
@@ -13,10 +13,10 @@ begin
 					veterinarian.surname, diagnosis.date
 					from animals join veterinarian on animals.id_vet = veterinarian.id_vet
 								 join diagnosis on animals.id_diagnosis = diagnosis.id_diagnosis
-					where veterinarian.surname = 'Авксентьева' and diagnosis.date >= '2016-01-01';
+					where veterinarian.surname = vet_surname_visit and diagnosis.date >= date_after;
 end;					
 $$
 language plpgsql;
 
 select *
-from visit_vet_after_year()
+from visit_vet_after_year('Авксентьева', '2016-01-01')
