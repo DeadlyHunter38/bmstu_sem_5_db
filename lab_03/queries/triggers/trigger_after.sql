@@ -24,5 +24,5 @@ update veterinarian
 set qualification = 'Первая'
 where id_vet = 1;
 
-select *
-from veterinarian
+--select *
+--from veterinarian
