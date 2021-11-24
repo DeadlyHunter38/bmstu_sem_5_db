@@ -1,3 +1,7 @@
+/*
+	Выполнить загрузку и сохранение json файла в таблицу.
+*/
+
 create table if not exists animals_copy
 (
 	id INT PRIMARY KEY,
