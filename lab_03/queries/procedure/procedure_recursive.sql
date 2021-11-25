@@ -23,25 +23,26 @@ values
 
 create temp table if not exists vets_submission_result
 (
-	surname varchar(20)
+	surname varchar(20),
+	level int
 );
 
 create or replace procedure define_submission() as
 $$
 begin
-	with recursive vs_rec as 
+	with recursive vs_rec(id_vet, boss_id_vet, surname, level) as 
 	(
-		select vets_s.id_vet, vets_s.boss_id_vet, vets_s.surname
+		select vets_s.id_vet, vets_s.boss_id_vet, vets_s.surname, 0
 		from vets_submission as vets_s
 		where vets_s.boss_id_vet is null
 		
 		union all
-		select vets_submission.id_vet, vets_submission.boss_id_vet, vets_submission.surname
+		select vets_submission.id_vet, vets_submission.boss_id_vet, vets_submission.surname, vs_rec.level + 1
 		from vs_rec join vets_submission on vs_rec.id_vet = vets_submission.boss_id_vet
 	)
 	
-	insert into vets_submission_result(surname)
-	select surname
+	insert into vets_submission_result(surname, level)
+	select surname, level
 	from vs_rec;
 end;
 $$

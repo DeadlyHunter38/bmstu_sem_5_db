@@ -21,3 +21,8 @@ language plpgsql;
 
 select *
 from more_animals('Акулов')
+
+select doc->>'name' as name, count(*) as cnt1
+from animals_import
+group by doc->>'name'
+having count(*)  > 2
