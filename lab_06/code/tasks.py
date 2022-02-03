@@ -206,3 +206,70 @@ def do_task_10(connection):
     for row in result:
         if row != None:
             print(row)
+
+def do_task_11(connection):
+    cursor = connection.cursor()
+    cursor.execute("""
+                    insert into hosts values
+                    (7, 'Марк', 25, 15);
+
+                    select *
+                    from hosts
+                   """)
+
+    connection.commit()
+    result = list()
+    row = cursor.fetchone()
+    result.append(row)
+    while row is not None:
+        row = cursor.fetchone()
+        result.append(row)
+    
+    print("Результат добавления нового хозяина:")
+    for row in result:
+        if row != None:
+            print(row)
+    print()
+
+    cursor.execute("""
+                    update hosts
+                    set host_name = 'Женя'
+                    where id_host = 7;
+
+                    select *
+                    from hosts
+                   """)
+
+    connection.commit()
+    result = list()
+    row = cursor.fetchone()
+    result.append(row)
+    while row is not None:
+        row = cursor.fetchone()
+        result.append(row)
+    print("Результат изменения имени хозяина:")
+    for row in result:
+        if row != None:
+            print(row)
+    print()
+
+    cursor.execute("""
+                    delete from hosts
+                    where host_name = 'Женя';
+
+                    select *
+                    from hosts
+                   """)
+
+    connection.commit()
+    result = list()
+    row = cursor.fetchone()
+    result.append(row)
+    while row is not None:
+        row = cursor.fetchone()
+        result.append(row)
+    
+    print("Результат удаления имени хозяина:")
+    for row in result:
+        if row != None:
+            print(row)

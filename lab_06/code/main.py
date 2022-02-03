@@ -42,6 +42,8 @@ def main():
             do_task_9(connection)
         elif choice == 10:
             do_task_10(connection)
+        elif choice == 11:
+            do_task_11(connection)
 
     connection.close()
     print("База данных успешно закрыта.")
